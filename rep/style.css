@@ -64,6 +64,7 @@ section.section1 div.direita{
     justify-content: center;
     flex-direction: column;
     gap: 30px;
+    
 }
 
 section.section1 div.esquerda {
@@ -99,6 +100,9 @@ section.section2 div.galeria {
 div.galeria img{
     height: 200px;
     object-fit: cover;
+
+
+ 
 }
 
 footer {
@@ -192,3 +196,5 @@ textarea::placeholder{
     color: black;
     font-size: 15px;
 }
+
+
