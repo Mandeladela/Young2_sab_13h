@@ -1,200 +1,174 @@
-
-
-
-* {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    border: none;
-    outline: none;
-    list-style: none;
-    
-}
-
-html {
-    scroll-behavior: smooth;
-}
-
+/* Estilos gerais para o tema gamer */
 body {
-    font-family: 'Poppins', sans-serif;
-    background-color: rgb(190, 190, 190);
-}
-
-nav {
-    background-color: rgb(200, 200, 200);
+    font-family: 'Press Start 2P', cursive; /* Fonte pixelada, estilo retrô de games */
+    background: linear-gradient(135deg, #0d1b2a, #1d2b3c); /* Fundo com gradiente de preto e azul */
     color: white;
+    margin: 0;
+    padding: 0;
 }
 
+/* Navegação */
 nav ul {
+    list-style: none;
     display: flex;
     justify-content: center;
-    gap: 30px;
-    padding: 20px;
+    background-color: #101820; /* Cor de fundo mais escura para a barra de navegação */
+    padding: 10px 0;
+    margin: 0;
+}
+
+nav ul li {
+    margin: 0 20px;
 }
 
 nav ul li a {
-    color: gray;
-    font-size: 26px;
-    font-weight: bold;
+    color: white;
     text-decoration: none;
-    padding: 20px;
+    font-size: 18px;
+    text-transform: uppercase;
 }
 
-nav ul li a:hover{
-    background-color: rgb(93, 93, 93);
-    color: white;
-    transition: background 0.3s ease-in-out, color 0.3s ease-in-out;
+nav ul li a:hover {
+    color: #00aaff; /* Azul claro para o hover */
+    font-weight: bold;
 }
 
-section {
-    height: 100vh;
-    text-align: center;
-}
-
-section.section1 {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    color: white;
-}
-
-section.section1 div.esquerda,
-section.section1 div.direita{
+/* Home Section */
+.section1 {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap: 30px;
-    
+    justify-content: space-between;
+    padding: 50px;
+    background-color: rgba(0, 0, 0, 0.8);
+    text-align: left;
 }
 
-section.section1 div.esquerda {
-    background-color: black;
-    border-right: 2px solid #d5d5d5;
+.esquerda h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    color: #00aaff; /* Azul claro para o título */
 }
 
-section.section1 div.direita img {
-    width: 400px;
+.esquerda p {
+    font-size: 1.5rem;
+    color: #ffffff;
 }
 
-h1 {
-    font-size: 40px;
-    width: 70%;
+.direita img {
+    max-width: 50%;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
 }
 
-p {
-    width: 60%;
+/* Galeria */
+.section2 {
+    padding: 40px;
+    background-color: #101820; /* Cor de fundo escura para a galeria */
 }
 
-section.section2 {
-    background-color: black;
+.galeria {
     display: grid;
-    place-items: center;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
 }
 
-section.section2 div.galeria {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 15px;
+.galeria img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
 }
 
-div.galeria img{
-    height: 200px;
-    object-fit: cover;
-
-
- 
+.galeria img:hover {
+    transform: scale(1.05);
 }
 
-footer {
-    display: grid;
-    place-items: center;
-    font-weight: bold;
-    background-color: rgb(60, 60, 60);
+/* Formulário */
+.section3 {
+    background-color: #101820; /* Cor de fundo escura para o formulário */
+    padding: 50px;
     text-align: center;
-    color: white;
-    padding: 30px;
-    font-size: 20px;
-
 }
 
-
-a.top-page {
-    /* FIXA POSIÇÃO NO CANTO */
-    position: fixed;
-    right: 30px;
-    bottom: 30px;
-    font-size: 30px;
-
-    background-color: black;
-    color: white;
-    text-decoration: none;
-    /* ARREDONTA O BOTÃO */
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    /* ALINHA NO CENTRO */
-    text-align: center  ;
-    /* BORDA  */
-    border: 1px solid rgb(255, 255, 255);
-    opacity: 0.3;
-    transition: opacity 0.5s ease, box-shadow 0.5s ease;
-    box-shadow: 0px 0px 0px rgb(255, 255, 255);
+.formulario h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #00aaff; /* Azul claro para o título */
 }
 
-a.top-page:hover {
-    opacity: 1;
-    box-shadow: 0px 0px 50px rgb(255, 255, 255);
-    transition: opacity 0.5s ease, box-shadow 0.5s ease;
-}
-
-section.section3{
-    display: grid;
-    place-items: center;
-
-}
-
-
-section.section3 div.formulario{
-    display: grid;
-    background-color: rgb(170, 170, 170);
-    border-radius: 10px;
-    padding: 25px;
-    
-}
-
-form{
-    display: grid;
-    
-}
-
-input, textarea{
-    background-color: rgb(150, 150, 150);
-    border-radius: 8px;
-    margin: 15px;
-    padding: 10px;
-}
-
-button {
-    border-radius: 10px;
-    font-size: 20px;
+.formulario input,
+.formulario textarea {
+    width: 80%;
     padding: 15px;
-    transition: background 0.3s ease-in-out, color 0.3s ease-in-out;
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 10px;
+    background-color: #333;
+    color: white;
+    font-size: 1rem;
 }
 
-button:hover{
-    background-color: rgb(105, 105, 105);
-    transition: background 0.3s ease-in-out, color 0.3s ease-in-out;
-    cursor: pointer; 
+.formulario button {
+    background-color: #00aaff; /* Azul para o botão */
+    color: white;
+    padding: 15px 40px;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: block; /* Garante que o botão ocupe a linha inteira */
+    margin: 0 auto; /* Centraliza o botão */
 }
 
-input::placeholder{
-    color: black;
-    font-size: 15px;
+.formulario button:hover {
+    background-color: #0088cc; /* Azul mais escuro no hover */
 }
 
-textarea::placeholder{
-    color: black;
-    font-size: 15px;
+/* Scroll to top button */
+.top-page {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: #00aaff; /* Azul para o botão de voltar ao topo */
+    color: white;
+    padding: 15px 20px;
+    border-radius: 50%;
+    font-size: 30px;
+    cursor: pointer;
+    z-index: 1000;
+    display: none;
 }
 
+.top-page:hover {
+    background-color: #0088cc; /* Azul mais escuro no hover */
+}
 
+/* Responsividade */
+@media (max-width: 768px) {
+    .section1 {
+        flex-direction: column;
+        text-align: center;
+        padding: 20px;
+    }
+
+    .galeria {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .formulario input,
+    .formulario textarea,
+    .formulario button {
+        width: 90%;
+    }
+}
+
+@media (max-width: 480px) {
+    .galeria {
+        grid-template-columns: 1fr;
+    }
+
+    .formulario input,
+    .formulario textarea {
+        width: 100%;
+    }
+}

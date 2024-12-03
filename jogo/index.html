@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caça ao Tesouro</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #2c3e50;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .game-container {
+            text-align: center;
+            background-color: #34495e;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            width: 400px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            grid-gap: 10px;
+            margin-top: 20px;
+        }
+
+        .cell {
+            width: 60px;
+            height: 60px;
+            background-color: #7f8c8d;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .cell:hover {
+            background-color: #95a5a6;
+        }
+
+        .cell.clicked {
+            background-color: #e74c3c;
+            pointer-events: none;
+        }
+
+        .cell.found {
+            background-color: #2ecc71;
+            pointer-events: none;
+        }
+
+        .message {
+            margin-top: 20px;
+            font-size: 1.5rem;
+        }
+
+        .attempts {
+            font-weight: bold;
+            font-size: 1.3rem;
+        }
+
+        .restart-button {
+            background-color: #3498db;
+            padding: 10px 20px;
+            font-size: 1.2rem;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .restart-button:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <h1>Caça ao Tesouro</h1>
+        <div class="grid" id="grid"></div>
+        <div class="message">
+            <p id="gameMessage">Clique em uma célula para procurar o tesouro!</p>
+            <p id="attemptsLeft" class="attempts">Tentativas restantes: 10</p>
+        </div>
+        <button id="restartButton" class="restart-button" onclick="restartGame()">Jogar Novamente</button>
+    </div>
+
+    <script>
+        let gridSize = 5;
+        let totalAttempts = 10;
+        let attemptsLeft = totalAttempts;
+        let treasurePosition = [Math.floor(Math.random() * gridSize), Math.floor(Math.random() * gridSize)];
+
+        const grid = document.getElementById("grid");
+        const gameMessage = document.getElementById("gameMessage");
+        const attemptsLeftElement = document.getElementById("attemptsLeft");
+        const restartButton = document.getElementById("restartButton");
+
+        // Gera o tabuleiro 5x5
+        function generateGrid() {
+            grid.innerHTML = "";
+            for (let i = 0; i < gridSize; i++) {
+                for (let j = 0; j < gridSize; j++) {
+                    const cell = document.createElement("div");
+                    cell.classList.add("cell");
+                    cell.dataset.row = i;
+                    cell.dataset.col = j;
+                    cell.addEventListener("click", handleCellClick);
+                    grid.appendChild(cell);
+                }
+            }
+        }
+
+        // Lida com o clique na célula
+        function handleCellClick(event) {
+            const cell = event.target;
+            const row = parseInt(cell.dataset.row);
+            const col = parseInt(cell.dataset.col);
+
+            attemptsLeft--;
+            attemptsLeftElement.textContent = `Tentativas restantes: ${attemptsLeft}`;
+
+            // Verifica se o jogador acertou
+            if (row === treasurePosition[0] && col === treasurePosition[1]) {
+                cell.classList.add("found");
+                gameMessage.textContent = "Parabéns! Você encontrou o tesouro!";
+                disableGrid();
+                restartButton.style.display = "block";
+            } else {
+                cell.classList.add("clicked");
+                giveHint(row, col);
+            }
+
+            // Verifica se as tentativas acabaram
+            if (attemptsLeft === 0) {
+                gameMessage.textContent = `Fim de jogo! O tesouro estava na posição [${treasurePosition[0]}, ${treasurePosition[1]}].`;
+                disableGrid();
+                restartButton.style.display = "block";
+            }
+        }
+
+        // Dá uma dica baseada na posição do tesouro
+        function giveHint(row, col) {
+            if (row < treasurePosition[0]) {
+                gameMessage.textContent = "O tesouro está mais abaixo!";
+            } else if (row > treasurePosition[0]) {
+                gameMessage.textContent = "O tesouro está mais acima!";
+            } else if (col < treasurePosition[1]) {
+                gameMessage.textContent = "O tesouro está mais à direita!";
+            } else if (col > treasurePosition[1]) {
+                gameMessage.textContent = "O tesouro está mais à esquerda!";
+            }
+        }
+
+        // Desabilita as células após o jogo acabar
+        function disableGrid() {
+            const cells = document.querySelectorAll(".cell");
+            cells.forEach(cell => cell.removeEventListener("click", handleCellClick));
+        }
+
+        // Reinicia o jogo
+        function restartGame() {
+            attemptsLeft = totalAttempts;
+            attemptsLeftElement.textContent = `Tentativas restantes: ${attemptsLeft}`;
+            gameMessage.textContent = "Clique em uma célula para procurar o tesouro!";
+            treasurePosition = [Math.floor(Math.random() * gridSize), Math.floor(Math.random() * gridSize)];
+            generateGrid();
+            restartButton.style.display = "none";
+        }
+
+        // Inicia o jogo
+        generateGrid();
+    </script>
+</body>
+</html>
